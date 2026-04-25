@@ -8,7 +8,7 @@ Partially. The SCRIPT WRITING SYSTEM section is reusable as-is for podcast scrip
 
 ### Can I commercialize the output master prompts and the videos they produce?
 
-Yes. MIT license, no royalty. Attribution to `waseemnasir2k26/reborn-history` appreciated, not required. The master prompts you generate are **your** artifact — sell, license, gatekeep, whatever.
+Yes. MIT license, no royalty. Attribution to `waseemnasir2k26/reborn-forge` appreciated, not required. The master prompts you generate are **your** artifact — sell, license, gatekeep, whatever.
 
 ### What if my reference YouTube video is private or removed?
 

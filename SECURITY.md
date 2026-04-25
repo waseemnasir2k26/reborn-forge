@@ -25,7 +25,7 @@ This repo does not make remote calls. There is no fetcher, no scraper, no server
 
 ## License + attribution
 
-MIT. Free for commercial use. Attribution to `waseemnasir2k26/reborn-history` appreciated, not required. See `LICENSE` for full terms.
+MIT. Free for commercial use. Attribution to `waseemnasir2k26/reborn-forge` appreciated, not required. See `LICENSE` for full terms.
 
 ## Responsible disclosure
 
