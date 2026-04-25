@@ -1,0 +1,45 @@
+# Build outputs
+PDF/*.pdf
+PDF/.tmp/
+*.aux
+*.log
+*.toc
+*.out
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Chrome / browser auth
+_chrome_profile/
+_html/
+*.cookies.json
+
+# Local secrets
+.env
+.env.local
+*.key
+secrets/
+
+# Generated assets (large)
+scenes/*.png
+scenes/*.jpg
+clips/*.mp4
+audio/*.wav
+audio/*.mp3
+exports/
+
+# Drafts
+DRAFT-*.md
+TEMP-*.md
