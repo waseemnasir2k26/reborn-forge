@@ -1,0 +1,51 @@
+name: Build PDFs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'prompts/**.md'
+      - 'examples/**.md'
+      - 'reference/**.md'
+      - 'README.md'
+      - 'SKILL.md'
+      - 'tools/_build.py'
+  pull_request:
+    paths:
+      - 'prompts/**.md'
+      - 'tools/_build.py'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install LaTeX + pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended texlive-lang-indic
+
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install markdown pdfkit weasyprint || true
+
+      - name: Build PDFs
+        run: python tools/_build.py
+        continue-on-error: true
+
+      - name: Upload PDFs as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reborn-history-pdfs
+          path: PDF/*.pdf
+          if-no-files-found: warn
+          retention-days: 30

@@ -1,89 +1,101 @@
----
-name: reborn-history
-description: Generate Tim-Reborn-style grimdark AI history videos in English. Three-phase pipeline (Script → Image Prompts → Scene JSONs) producing cinematic 8–18 min YouTube longforms or 60s Shorts. Engineered for ASMR-tier sleep-listen retention, citation-grade historical accuracy, and Midjourney v7 + Kling 2.5 + ElevenLabs v3 + VEO 3.1 production stack. Optional locales include Hindi (Urdu-leaning Hindustani). Trigger when user says "reborn history", "AI history video", "grimdark history", "history reconstruction", "plague video", "fallen empire video", or invokes /reborn-history.
+# SKILL.md
+
+```yaml
+name: reborn-master-prompt-generator
+version: 2.1.0
+description: |
+  Meta-skill that generates a niche-locked master prompt for AI video creation
+  given a NICHE and a reference YOUTUBE_URL. Runs a 5-agent reverse-engineering
+  pipeline (Niche Intelligence → Video Analysis → Pattern Engine → Prompt
+  Architect → Output Compiler) and emits a single paste-and-run master prompt
+  conforming to a 34-section canonical structure including a SCRIPT WRITING
+  SYSTEM section with mode-based narration (full / minimal / text-only / silent),
+  register lock, hook formula, retention mechanics, and cue notation. The output
+  prompt is topic-agnostic within the niche and reusable across an entire channel.
+inputs:
+  - NICHE (required)
+  - YOUTUBE_URL (required)
+  - TARGET_TOOL (optional, default VEO3)
+  - DURATION (optional, default longform)
+  - LANGUAGE (optional, default English)
+  - EXTRA_NOTES (optional)
+outputs:
+  - master_prompt (markdown, 1500+ words, 33 sections)
+entrypoint: META-PROMPT.md
 license: MIT
+```
+
 ---
-
-# Reborn History — Claude Code Skill
-
-Cinematic AI-history video generation system. Reverse-engineered from Tim - Reborn History (`@Tim_Reborn_History`), reference video *The Bubonic Plague in the 1300s* (`X-UgHOce2kk`).
-
-**Default language:** English (general). **Optional locales:** Hindi (Urdu-leaning Hindustani).
-
-## When to use
-
-- User asks for an AI-history YouTube video
-- Topic is dark/grimdark: plague, war, atrocity, fall-of-empire, lost civilization, disaster
-- Format is faceless, narrated, cinematic, 8–18 min longform OR 60s Short
-- Target stack: Midjourney v7 / Flux 1.1 Pro + Kling 2.5 / Runway Gen-4 / VEO 3.1 + ElevenLabs v3 + CapCut/Premiere
-
-## Pipeline
-
-Three phases. One input.
-
-| Phase | Output | Tool consumes |
-|-------|--------|---------------|
-| 1 | Script (markdown, scene-by-scene VO + SFX + visual seed) | ElevenLabs (VO), `tools/_build.py` (PDF) |
-| 2 | Image prompts (one per scene, era-locked, anti-anachronism) | Midjourney v7 / Flux 1.1 Pro / Nano Banana |
-| 3 | Scene JSONs (camera + motion + audio + continuity locks) | Kling 2.5 Master / Runway Gen-4 / VEO 3.1 |
 
 ## How to invoke
 
-1. Pick prompt by language + format:
-   - **English grimdark longform (DEFAULT)** → [`prompts/MASTER-PROMPT-REBORN-ENGLISH.md`](./prompts/MASTER-PROMPT-REBORN-ENGLISH.md)
-   - English/Hindi grimdark Short (9:16, 60s) → [`prompts/MASTER-PROMPT-SHORT-HINDI.md`](./prompts/MASTER-PROMPT-SHORT-HINDI.md)
-   - Hindi grimdark longform (Urdu-leaning) → [`prompts/MASTER-PROMPT-REBORN-HINDI.md`](./prompts/MASTER-PROMPT-REBORN-HINDI.md)
-   - Hindi golden-hour longform → [`prompts/MASTER-PROMPT-LONG-HINDI.md`](./prompts/MASTER-PROMPT-LONG-HINDI.md)
-2. Copy the fenced master-prompt block, paste into Claude/GPT/Gemini.
-3. Fill INPUT (TOPIC, ERA, GEOGRAPHY, DURATION, NARRATOR, KEY FIGURES).
-4. Receive Phase 1 (Script). Then `phase 2` (Image prompts), then `phase 3` (Scene JSONs).
+1. Open `META-PROMPT.md`. Copy the entire file.
+2. Paste into Claude / GPT-5 / Gemini.
+3. Append your INPUT block at the bottom.
+4. Submit. Receive the master prompt.
 
-## Inputs
+## Canonical output sections (34)
 
-```
-TOPIC: <event/era>          — e.g. "Bubonic Plague 1347 Europe"
-ERA: <verified dates>       — e.g. "1347–1351 CE"
-GEOGRAPHY: <route>          — e.g. "Messina → Genoa → Marseille → Paris"
-DURATION: 8 | 12 | 18 min   — longform; 45 | 60 sec for Short
-NARRATOR: <ElevenLabs voice>— e.g. "Adam (British-RP somber)" / "Daniel" / "Brian"
-KEY FIGURES: <optional>     — verified historical individuals
-```
+The generated master prompt MUST contain, in order:
 
-## Constraints (anti-fail)
+1. Header line (`You are an AI system specialized in...`)
+2. PRIMARY OBJECTIVE (PRIORITY ORDER)
+3. INPUT SYSTEM
+4. DESIGN AUTONOMY RULE
+5. HIGH RETENTION SYSTEM
+6. VISUAL HOOK RULE
+7. VARIATION ENGINE
+8. SECTION GENERATION SYSTEM
+9. STRUCTURE / WORLD CONSISTENCY
+10. SPATIAL / TEMPORAL CONTINUITY
+11. CAMERA SYSTEM
+12. CONTINUITY RULE
+13. NO REGRESSION RULE
+14. OBJECT / ELEMENT PERSISTENCE
+15. {NICHE_PROCESS} STAGES
+16. MICRO-STAGE DETAIL SYSTEM
+17. {KEY_COMPLETION} RULE
+18. SYMMETRY / BALANCE RULE
+19. STAGE RULES
+20. PROGRESS RULE
+21. {NICHE_KEY_MOMENT} RULE
+22. TRANSITION SYSTEM
+23. PACING
+24. AUDIO SYSTEM
+25. **SCRIPT WRITING SYSTEM** (always present; MODE = full-narration / minimal-narration / text-only / silent)
+26. LIGHTING SYSTEM
+27. COLOR GRADING LOCK
+28. IMAGE QUALITY SYSTEM
+29. MASTER IMAGE TEMPLATE
+30. SCENE SYSTEM (JSON schema)
+31. OUTPUT CONTROL
+32. FAILSAFE
+33. STYLE LOCK
+34. END OF PROMPT marker
 
-- **Anachronism kill list**: plague-doctor beak mask pre-1619, eyeglasses pre-1286, printed books pre-1440, gunpowder cannon pre-1340, Yersinia pestis as period name (named 1894).
-- **Pacing lock**: 4–6 sec/shot longform, 1.5–2.5 sec Shorts. Hold 12–25s on hero stills.
-- **Audio lock**: VO 125–140 wpm; music −20 LUFS under VO; first 8 sec silent.
-- **Color lock**: crushed black + cool blue-grey + desaturated mid-greens + 55% saturation + heavy 16mm grain + FilmConvert Nostalgic LUT.
-- **Composition signature (Tim Reborn)**: low-angle + over-shoulder POV + dirty foreground (hood, hand, banner edge).
-- **Continuity lock**: 50-word character description reused VERBATIM across scenes.
+## Quality gates
 
-## Output deliverables
+- Variation engine: ≥ 4 axes × ≥ 5 variants
+- Stage progression: ≥ 6 niche-specific stages
+- Audio system: maps SFX + music + VO to every stage
+- **Script Writing System: explicit MODE, full register lock, second-by-second hook formula, ≥ 4 retention mechanics, cue notation reference, closing formula, ≥ 6 anti-fail rules, worked output example**
+- Lighting system: progresses across stages
+- FAILSAFE: ≥ 8 niche-specific rules
+- Style Lock: focal length + grade + tones specified
+- Length: ≥ 1800 words (script section adds ~300 words to baseline)
+- Zero unfilled `{placeholders}` in final output
 
-- `SCRIPT-<topic>-REBORN.md`
-- `IMAGE-PROMPTS-<topic>-REBORN.md`
-- `SCENES-<topic>-REBORN.json`
-- PDF via `python tools/_build.py`
+## Special commands (post-generation)
 
-## Skill files
+- `show phase 1..5` — emit the internal agent output for that phase
+- `variant` — regenerate only the VARIATION ENGINE section with different axes/values
+- `tighten` — reduce output by 30–40% (keep rules, drop examples)
+- `loosen` — expand examples and edge cases by 30–40%
+- `script only` — emit only the SCRIPT WRITING SYSTEM section
+- `flip mode to {full-narration|minimal-narration|text-only|silent}` — regenerate SCRIPT WRITING SYSTEM with that mode
 
-- [`prompts/`](./prompts/) — four master prompts (English-Reborn DEFAULT, Hindi-Reborn, Hindi-Long, Hindi-Short)
-- [`reference/`](./reference/) — 5-agent pipeline outputs: niche intelligence, video analysis, pattern engine, prompt architect, output compiler, Tim Reborn deep research
-- [`examples/`](./examples/) — sample INPUT blocks
-- [`tools/_build.py`](./tools/_build.py) — markdown → PDF builder
+## Safety / scope
 
-## Cost + time per video
-
-| Tier | Tooling | Cost | Time |
-|------|---------|------|------|
-| Low | Midjourney Basic + Kling 2.5 std + ElevenLabs Creator | $35–48 | 6 hrs |
-| Mid | Midjourney Std + Kling 2.5 Master + Runway Gen-4 hero + ElevenLabs Pro | $70–110 | 8 hrs |
-| Premium | Midjourney Pro + Kling 2.5 Master + VEO 3.1 + ElevenLabs voice clone | $130–190 | 10 hrs |
-
-## Continuation commands
-
-`phase 2` · `phase 3` · `rebuild scene N` · `variant` (4-axis reroll) · `next episode` · `convert to short` · `extend to 18 min`
-
-## License
-
-MIT. Free for commercial use. Attribution appreciated.
+- Does not generate scripts, images, or videos itself — only the master prompt.
+- Does not fetch external URLs autonomously beyond what the host model supports. If URL fetch fails, will request manual paste of title + transcript + first-30s frame description.
+- No fabricated observations: if the reference video cannot be analyzed, the agent halts and asks the user.
