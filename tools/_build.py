@@ -1,12 +1,24 @@
 #!/usr/bin/env python
-"""MD -> HTML -> PDF for AI History Reborn product files. Copy-adapted from Skyline Reborn."""
-import sys, os, io, subprocess, pathlib
+"""MD -> HTML -> PDF for Reborn Master Prompt Generator.
+
+Cross-platform:
+- Windows: Chrome headless (fast, reuses installed Chrome)
+- Linux/CI: WeasyPrint (no Chrome dep, works in GitHub Actions)
+
+Auto-discovers all .md files at repo root + agents/ + templates/ + examples/.
+"""
+import sys, os, io, subprocess, pathlib, platform
 import markdown
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
-ROOT = pathlib.Path(__file__).parent
-CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+# tools/_build.py -> repo root is one up
+ROOT = pathlib.Path(__file__).resolve().parent
+if ROOT.name == "tools":
+    ROOT = ROOT.parent
+
+CHROME_WIN = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+IS_WINDOWS = platform.system() == "Windows"
 
 CSS = """
 @page { size: A4; margin: 20mm 18mm; }
@@ -42,14 +54,14 @@ def md_to_html(md_path, title):
     return f"""<!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>{title}</title><style>{CSS}</style></head>
 <body>{html_body}
-<div class="footer">AI History Reborn &bull; {title}</div>
+<div class="footer">Reborn Master Prompt Generator &bull; {title}</div>
 </body></html>"""
 
-def html_to_pdf(html_path, pdf_path):
+def html_to_pdf_chrome(html_path, pdf_path):
     user_data = ROOT / "_chrome_profile"
     user_data.mkdir(exist_ok=True)
     result = subprocess.run([
-        CHROME, "--headless=new", "--disable-gpu", "--no-sandbox",
+        CHROME_WIN, "--headless=new", "--disable-gpu", "--no-sandbox",
         f"--user-data-dir={user_data}",
         "--no-pdf-header-footer",
         "--virtual-time-budget=2000",
@@ -60,13 +72,30 @@ def html_to_pdf(html_path, pdf_path):
         print("  STDERR:", result.stderr[:500])
         raise subprocess.CalledProcessError(result.returncode, result.args)
 
-# Auto-discover all .md files in root (except README by default — include it if you want)
-MD_FILES = sorted([p for p in ROOT.glob("*.md")])
+def html_to_pdf_weasy(html_path, pdf_path):
+    from weasyprint import HTML
+    HTML(filename=str(html_path)).write_pdf(str(pdf_path))
+
+def html_to_pdf(html_path, pdf_path):
+    if IS_WINDOWS and pathlib.Path(CHROME_WIN).exists():
+        html_to_pdf_chrome(html_path, pdf_path)
+    else:
+        html_to_pdf_weasy(html_path, pdf_path)
+
+# Auto-discover .md files at root + agents/ + templates/ + examples/ + prompts/legacy/
+SCAN_DIRS = [ROOT, ROOT / "agents", ROOT / "templates", ROOT / "examples", ROOT / "prompts" / "legacy"]
+MD_FILES = []
+for d in SCAN_DIRS:
+    if d.exists():
+        MD_FILES.extend(sorted(d.glob("*.md")))
 
 out_dir = ROOT / "PDF"
 out_dir.mkdir(exist_ok=True)
 html_dir = ROOT / "_html"
 html_dir.mkdir(exist_ok=True)
+
+print(f"Engine: {'Chrome (Windows)' if IS_WINDOWS and pathlib.Path(CHROME_WIN).exists() else 'WeasyPrint'}")
+print(f"Files:  {len(MD_FILES)}")
 
 for md_path in MD_FILES:
     title = md_path.stem.replace("-", " ").title()
@@ -75,7 +104,10 @@ for md_path in MD_FILES:
     html_path.write_text(html, encoding="utf-8")
     pdf_path = out_dir / (md_path.stem + ".pdf")
     print(f"Building {pdf_path.name} ...")
-    html_to_pdf(html_path, pdf_path)
-    print(f"  OK {pdf_path.stat().st_size // 1024} KB")
+    try:
+        html_to_pdf(html_path, pdf_path)
+        print(f"  OK {pdf_path.stat().st_size // 1024} KB")
+    except Exception as e:
+        print(f"  FAIL {e}")
 
 print("Done.")

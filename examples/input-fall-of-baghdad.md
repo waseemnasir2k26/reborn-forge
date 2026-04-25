@@ -2,7 +2,7 @@
 
 > Alternate geography test. Mongol siege of Baghdad ended the Abbasid Caliphate. Library of Wisdom destroyed. Tigris ran black with ink, then red with blood.
 
-## Paste into MASTER-PROMPT-REBORN-ENGLISH.md INPUT block
+## Paste into prompts/legacy/MASTER-PROMPT-REBORN-ENGLISH.md INPUT block
 
 ```
 TOPIC: Saqoot-e-Baghdad 1258 — Mongol Siege of the Abbasid Caliphate
@@ -13,7 +13,7 @@ NARRATOR: ElevenLabs "Brian" — British-RP somber, slight mournful drift
 KEY NAMED FIGURES: Hulagu Khan, Caliph Al-Musta'sim, Nasir al-Din al-Tusi, Ata-Malik Juvayni
 ```
 
-## Hindi locale variant (use MASTER-PROMPT-REBORN-HINDI.md)
+## Hindi locale variant (use prompts/legacy/MASTER-PROMPT-REBORN-HINDI.md)
 
 ```
 TOPIC: Saqoot-e-Baghdad 1258 — Mongolon ka Hamla

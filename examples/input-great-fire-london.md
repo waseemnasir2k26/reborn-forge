@@ -2,7 +2,7 @@
 
 > Early modern disaster test. 4 days, ~13,200 houses + 87 churches destroyed including old St Paul's. ~6 known deaths, but estimated displaced population ~70,000.
 
-## Paste into MASTER-PROMPT-REBORN-ENGLISH.md INPUT block
+## Paste into prompts/legacy/MASTER-PROMPT-REBORN-ENGLISH.md INPUT block
 
 ```
 TOPIC: The Great Fire of London 1666

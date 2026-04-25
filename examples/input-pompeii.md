@@ -2,7 +2,7 @@
 
 > Antiquity disaster test. The eruption killed ~2,000 in Pompeii + Herculaneum within 18 hours. Pliny the Younger's letters are the canonical period source.
 
-## Paste into MASTER-PROMPT-REBORN-ENGLISH.md INPUT block
+## Paste into prompts/legacy/MASTER-PROMPT-REBORN-ENGLISH.md INPUT block
 
 ```
 TOPIC: Pompeii 79 CE — The Last Day of a Roman City

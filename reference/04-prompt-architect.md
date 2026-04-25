@@ -1,6 +1,6 @@
 # Agent 4 — Prompt Architect
 
-> Designs the master prompt as a pipeline-style system. The compiled output lives in `prompts/MASTER-PROMPT-REBORN-ENGLISH.md`. This document is the **architecture spec** — the reasoning behind every section of the master prompt.
+> Designs the master prompt as a pipeline-style system. The compiled output lives in `prompts/legacy/MASTER-PROMPT-REBORN-ENGLISH.md` (v1 worked example). This document is the **architecture spec** — the reasoning behind every section of the master prompt. For the v2 generalized agent, see `agents/04-prompt-architect.md`.
 
 **INPUT:**
 - NICHE PROFILE: `01-niche-intelligence.md`

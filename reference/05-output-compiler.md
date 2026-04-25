@@ -1,6 +1,6 @@
 # Agent 5 — Output Compiler
 
-> Cleans + finalizes the master prompt for direct paste-and-use. The compiled artifact lives in [`prompts/MASTER-PROMPT-REBORN-ENGLISH.md`](../prompts/MASTER-PROMPT-REBORN-ENGLISH.md).
+> Cleans + finalizes the master prompt for direct paste-and-use. The compiled artifact lives in [`prompts/legacy/MASTER-PROMPT-REBORN-ENGLISH.md`](../prompts/legacy/MASTER-PROMPT-REBORN-ENGLISH.md) (v1 worked example). For v2 generalized agent, see `agents/05-output-compiler.md`.
 
 This document records the **compiler decisions** — what was removed, what was tightened, what was kept verbatim, and why.
 
@@ -34,13 +34,13 @@ This document records the **compiler decisions** — what was removed, what was 
 
 The final master prompt is at:
 
-**[`../prompts/MASTER-PROMPT-REBORN-ENGLISH.md`](../prompts/MASTER-PROMPT-REBORN-ENGLISH.md)** (DEFAULT, English, general use)
+**[`../prompts/legacy/MASTER-PROMPT-REBORN-ENGLISH.md`](../prompts/legacy/MASTER-PROMPT-REBORN-ENGLISH.md)** (v1 DEFAULT, English, general use)
 
 Three additional locale/format compilations:
 
-- [`../prompts/MASTER-PROMPT-REBORN-HINDI.md`](../prompts/MASTER-PROMPT-REBORN-HINDI.md) — Hindi grimdark longform (Urdu-leaning)
-- [`../prompts/MASTER-PROMPT-LONG-HINDI.md`](../prompts/MASTER-PROMPT-LONG-HINDI.md) — Hindi golden-hour longform
-- [`../prompts/MASTER-PROMPT-SHORT-HINDI.md`](../prompts/MASTER-PROMPT-SHORT-HINDI.md) — Hindi/English Short (9:16, 60s)
+- [`../prompts/legacy/MASTER-PROMPT-REBORN-HINDI.md`](../prompts/legacy/MASTER-PROMPT-REBORN-HINDI.md) — Hindi grimdark longform (Urdu-leaning)
+- [`../prompts/legacy/MASTER-PROMPT-LONG-HINDI.md`](../prompts/legacy/MASTER-PROMPT-LONG-HINDI.md) — Hindi golden-hour longform
+- [`../prompts/legacy/MASTER-PROMPT-SHORT-HINDI.md`](../prompts/legacy/MASTER-PROMPT-SHORT-HINDI.md) — Hindi/English Short (9:16, 60s)
 
 ---
 

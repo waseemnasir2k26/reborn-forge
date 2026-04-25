@@ -2,7 +2,7 @@
 
 > The canonical reference. Use this to test the prompt end-to-end. Reference video: [The Bubonic Plague in the 1300s — Tim Reborn History](https://www.youtube.com/watch?v=X-UgHOce2kk).
 
-## Paste into MASTER-PROMPT-REBORN-ENGLISH.md INPUT block
+## Paste into prompts/legacy/MASTER-PROMPT-REBORN-ENGLISH.md INPUT block
 
 ```
 TOPIC: Bubonic Plague 1347 Europe
