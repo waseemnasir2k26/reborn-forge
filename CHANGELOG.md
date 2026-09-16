@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2026.09] - 2026-09-16
+
+- Maintenance review of reborn-forge — "Reborn", a niche-agnostic meta-prompt generator that turns a NICHE plus a reference YouTube URL into a reusable 33-section master prompt for AI video generation.
+- Status: v2.3.0 (two-mode release, INCLUDE_SCRIPT branch plus the script-to-scenes math pipeline). The five-agent pipeline lives in `agents/01`–`05` with matching `reference/` notes; `META-PROMPT.md` is the paste-in entry point; six example inputs and three generated master prompts are checked into `examples/` and `outputs/generated/`; seven legacy prompts (EN/HI, long/short) are kept under `prompts/legacy/`.
+- Stack: Markdown-first prompt engineering with Python helpers (`_build.py`, `tools/_build.py`, `scripts/bulk-generate.py`, `scripts/video-analyze.py`), a `promptfoo.yaml` eval config, and two GitHub Actions workflows (`validate.yml`, `pdf-build.yml`); MIT licensed with SECURITY, CONTRIBUTING and issue templates in place.
+- Reviewed September 2026: docs refreshed, versioned as v2026.09. No prompts, agents, scripts, workflows or generated outputs were changed, and the project's own 2.3.0 semver was left as is.
+- Known gaps: `_build.py` exists at both the repo root and in `tools/`, and `MASTER-PROMPT-TEMPLATE.md` exists at both the root and in `templates/` — duplicated files that could drift; the niche registry ships only as `niches.example.json`; no live URL or hosted deployment is stated.
+
 ## [2.3.0] — 2026-04-25
 
 Two-mode release. Master prompts now branch on whether the niche needs a written script (history, lore, mystery) or is purely visual (restoration, craft, ASMR). When a script is needed, an automatic math pipeline computes scene and image counts from voiceover length.

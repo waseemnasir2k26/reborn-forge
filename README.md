@@ -10,6 +10,10 @@
 
 ---
 
+## Status
+
+Last reviewed: September 2026 · release v2026.09
+
 ## What this is
 
 A **niche-agnostic prompt-generation system**. Where the original `reborn-history` repo produced one hardcoded master prompt for grimdark history videos, this repo produces a **new master prompt for any niche you point it at**.
