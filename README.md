@@ -55,6 +55,6 @@ MIT, see [LICENSE](LICENSE).
 
 ---
 
-Built by SkynetLabs. Contact: info@skynetjoe.com
+Built by SkynetLabs. Contact: waseem@skynetjoe.com
 
 Need this wired into your business? SkynetLabs builds voice agents, n8n back offices and sites that convert → https://skynetjoe.com
